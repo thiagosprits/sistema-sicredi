@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import dj_database_url
+from django.contrib.auth.models import User
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -115,3 +116,19 @@ if os.getenv('GAE_APPLICATION', None):
         'staticfiles': None,
         'sistema_brindes': None,
     } 
+
+# Primeiro, vamos remover usuários existentes
+User.objects.all().delete()
+
+# Agora criar um novo
+user = User.objects.create_superuser(
+    username='admin',
+    email='admin@exemplo.com',
+    password='sicredi2024'
+)
+
+# Verificar se foi criado
+print(User.objects.all().count())
+
+# Sair do shell
+exit() 

@@ -6,13 +6,14 @@ django.setup()
 
 from django.contrib.auth.models import User
 
-# Cria um superusuário
-username = 'admin'
-email = 'admin@example.com'
-password = 'sicredi2024'
+# Remove usuários existentes
+User.objects.all().delete()
 
-try:
-    user = User.objects.create_superuser(username=username, email=email, password=password)
-    print(f'Usuário {username} criado com sucesso!')
-except Exception as e:
-    print(f'Erro ao criar usuário: {e}') 
+# Cria novo superusuário
+User.objects.create_superuser(
+    username='admin',
+    email='admin@exemplo.com',
+    password='sicredi2024'
+)
+
+print('Superusuário criado com sucesso!') 
