@@ -1,15 +1,18 @@
 import os
 from pathlib import Path
-from google.cloud import datastore
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '59d24cd6528a138db086721d48f295c8631d878dy'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'sua-chave-secreta-aqui'
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,7 +26,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'sistema_brindes.middleware.DatabaseInitMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,29 +54,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sistema.wsgi.application'
 
-AUTHENTICATION_BACKENDS = [
-    'sistema.db.FirestoreBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-if os.getenv('GAE_APPLICATION', None):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'sicredi',
-            'USER': 'postgres',
-            'PASSWORD': 'sicredi2024',
-            'HOST': '/cloudsql/sistema-sicredi:southamerica-east1:sicredi',
-            'PORT': '5432',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -96,11 +81,9 @@ TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
