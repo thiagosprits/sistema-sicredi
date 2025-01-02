@@ -92,7 +92,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/' 
 
 # Configuração do MongoDB
-MONGODB_URI = 'mongodb+srv://admin:sicredi2024@cluster0.ggbtl.mongodb.net/sicredi?retryWrites=true&w=majority' 
 
 # Configuração de sessão em memória
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
@@ -117,7 +116,7 @@ if os.getenv('GAE_APPLICATION', None):
     } 
 
 # Primeiro, vamos remover usuários existentes
-User.objects.all().delete()
+
 
 # Agora criar um novo
 user = User.objects.create_superuser(
