@@ -1,0 +1,24 @@
+runtime: python312
+
+instance_class: B1
+
+handlers:
+  - url: /static
+    static_dir: staticfiles/
+    secure: always
+
+  - url: /.*
+    script: auto
+    secure: always
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: "sistema.settings"
+  DEBUG: "True"
+
+entrypoint: gunicorn sistema.wsgi:application --bind :$PORT --timeout 120
+
+beta_settings:
+  cloud_sql_instances: sistema-sicredi:southamerica-east1:sicredi
+
+manual_scaling:
+  instances: 1
