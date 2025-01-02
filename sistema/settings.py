@@ -118,15 +118,7 @@ if os.getenv('GAE_APPLICATION', None):
 # Primeiro, vamos remover usuários existentes
 
 
-# Agora criar um novo
-user = User.objects.create_superuser(
-    username='admin',
-    email='admin@exemplo.com',
-    password='sicredi2024'
-)
 
-# Verificar se foi criado
-print(User.objects.all().count())
 
 # Sair do shell
 exit() 
