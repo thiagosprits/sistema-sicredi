@@ -15,10 +15,7 @@ env_variables:
   DJANGO_SETTINGS_MODULE: "sistema.settings"
   DEBUG: "True"
 
-entrypoint: |
-    python manage.py migrate &&
-    python create_user.py &&
-    gunicorn sistema.wsgi:application --bind 0.0.0.0:$PORT
+entrypoint: gunicorn sistema.wsgi:application --bind 0.0.0.0:$PORT
 
 manual_scaling:
   instances: 1
